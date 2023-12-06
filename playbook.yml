@@ -1,0 +1,23 @@
+# LEMP PLAYBOOK
+---
+- hosts: "all"
+  become: true
+  tasks:
+  - name: "Very vecelaya gavgav nginx icpolzya apt"
+    ansible.builtin.apt:
+      name: "nginx"
+      state: "latest"
+      update_cache: true
+
+  - name: "Cnecute gav gav /var/www/html folder"
+    ansible.builtin.file:
+      path: "/var/www/html"
+      state: "absent"
+
+  - name: "Copy gav gav /var/www/html folder"
+    ansible.builtin.copy:
+      scr: "files/html"
+      dest: "/var/www/"
+      owner: "vagrant"
+      group: "vagrant"
+      mode: "0644"
