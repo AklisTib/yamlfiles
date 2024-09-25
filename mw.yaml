@@ -1,0 +1,28 @@
+   version: '3.8'
+
+   services:
+     db:
+       image: mariadb:10.5
+       container_name: mediawiki_db
+       environment:
+         MYSQL_DATABASE: my_wiki
+         MYSQL_USER: wiki_user
+         MYSQL_PASSWORD: wiki_password
+         MYSQL_ROOT_PASSWORD: root_password
+       volumes:
+         - db_data:/var/lib/mysql
+
+     mediawiki:
+       image: mediawiki:1.35
+       container_name: mediawiki
+       ports:
+         - "8080:80"
+       depends_on:
+         - db
+       volumes:
+         - ./images:/var/www/html/images
+         - ./LocalSettings.php:/var/www/html/LocalSettings.php
+
+   volumes:
+     db_data:
+   
